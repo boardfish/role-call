@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Users:</strong>
+  <%= @game.game_sessions.map { |game_session| [game_session.user.nickname, game_session.role.name] } %>
+</p>
+
+<p>
+  <strong>Game master:</strong>
+  <%= @game.game_master.nickname %>
+</p>
+
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %>

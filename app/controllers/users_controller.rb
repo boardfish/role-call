@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate, except: [:new]
 
   # GET /users
   # GET /users.json
@@ -60,11 +61,17 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+    end
+
+    def authenticate
+      flash[:notice] = "Valid: @user is nil"
+      return unless @user
+      valid = session[:access_token] == @user.access_token
+      flash[:notice] = "Valid: #{valid}"
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

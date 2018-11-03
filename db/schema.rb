@@ -10,16 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_03_155517) do
+ActiveRecord::Schema.define(version: 2018_11_03_162359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "game_sessions", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "game_id"
+    t.bigint "role_id"
+    t.integer "state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_game_sessions_on_game_id"
+    t.index ["role_id"], name: "index_game_sessions_on_role_id"
+    t.index ["user_id"], name: "index_game_sessions_on_user_id"
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.bigint "game_master_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_master_id"], name: "index_games_on_game_master_id"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.string "rules"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "phone_number"
     t.string "nickname"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "access_token"
+    t.datetime "last_generated_at"
   end
 
+  add_foreign_key "game_sessions", "games"
+  add_foreign_key "game_sessions", "roles"
+  add_foreign_key "game_sessions", "users"
+  add_foreign_key "games", "users", column: "game_master_id"
 end

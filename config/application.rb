@@ -8,7 +8,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module GithubTakeHomeTestApplication
+module Werewolves
   # Application developed as part of a take home test for the position of Rails
   # Developer Intern at GitHub. Its function is to allow users to log in and see
   # their public GitHub profile information.
