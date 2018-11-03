@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy]
+  before_action :set_game, only: [:show, :edit, :update, :destroy, :join]
   before_action :authenticate
 
   # GET /games
@@ -62,6 +62,14 @@ class GamesController < ApplicationController
     end
   end
 
+  def join
+    @game_session = GameSession.create(
+      user: User.find(session[:user_id]),
+      game: @game,
+      role: set_role
+    )
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_game
@@ -78,5 +86,9 @@ class GamesController < ApplicationController
       return unless @game
       valid = session[:access_token] = @game.game_master.access_token
       flash[:notice] = "Valid: #{valid}"
+    end
+
+    def set_role
+      Role.order("RANDOM()").first
     end
 end

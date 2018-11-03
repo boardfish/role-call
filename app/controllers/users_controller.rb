@@ -29,7 +29,9 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        session[:access_token] = @user.access_token
+        session[:user_id] = @user.id
+        format.html { redirect_to games_url, notice: 'Welcome! Please join a game.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
