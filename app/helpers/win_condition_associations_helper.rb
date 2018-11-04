@@ -1,0 +1,2 @@
+module WinConditionAssociationsHelper
+end

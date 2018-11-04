@@ -11,3 +11,8 @@
 #              [{ name: 'Star Wars' }, { name: 'Lord of the Rings' }]
 #              )
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# Seed all roles
+seed_file = Rails.root.join('db', 'seeds', 'roles.yml')
+config = YAML::load_file(seed_file)
+Role.create!(config)

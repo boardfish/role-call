@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Win condition:</strong>
+  <%= @win_condition_association.win_condition %>
+</p>
+
+<p>
+  <strong>Role:</strong>
+  <%= @win_condition_association.role %>
+</p>
+
+<%= link_to 'Edit', edit_win_condition_association_path(@win_condition_association) %> |
+<%= link_to 'Back', win_condition_associations_path %>

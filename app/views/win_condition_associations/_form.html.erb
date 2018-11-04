@@ -1,0 +1,27 @@
+<%= form_with(model: win_condition_association, local: true) do |form| %>
+  <% if win_condition_association.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(win_condition_association.errors.count, "error") %> prohibited this win_condition_association from being saved:</h2>
+
+      <ul>
+      <% win_condition_association.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :win_condition_id %>
+    <%= form.text_field :win_condition_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :role_id %>
+    <%= form.text_field :role_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

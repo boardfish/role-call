@@ -14,8 +14,11 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    <%= session[:access_token] %>
-    <%= session[:user_id] %>
+    <%= User.find_by(id: session[:user_id])&.nickname || 'Not logged in' %>
+    <%= link_to 'Users', users_path %> | 
+    <%= link_to 'Games', games_path %>
+    <%= link_to 'Win Conditions', win_conditions_path %>
+    <%= link_to 'Assign Win Conditions', win_condition_associations_path %>
     <div class="container-fluid">
       <%= yield %>
     </div>

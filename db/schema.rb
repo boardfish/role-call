@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_03_162359) do
+ActiveRecord::Schema.define(version: 2018_11_04_152854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,23 +22,26 @@ ActiveRecord::Schema.define(version: 2018_11_03_162359) do
     t.integer "state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "target"
     t.index ["game_id"], name: "index_game_sessions_on_game_id"
     t.index ["role_id"], name: "index_game_sessions_on_role_id"
     t.index ["user_id"], name: "index_game_sessions_on_user_id"
   end
 
   create_table "games", force: :cascade do |t|
-    t.bigint "game_master_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "game_master_id"
     t.index ["game_master_id"], name: "index_games_on_game_master_id"
   end
 
   create_table "roles", force: :cascade do |t|
     t.string "name"
-    t.string "rules"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "group"
+    t.string "role_type"
+    t.string "description"
   end
 
   create_table "users", force: :cascade do |t|
@@ -50,8 +53,27 @@ ActiveRecord::Schema.define(version: 2018_11_03_162359) do
     t.datetime "last_generated_at"
   end
 
+  create_table "win_condition_associations", force: :cascade do |t|
+    t.bigint "win_condition_id"
+    t.bigint "role_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_win_condition_associations_on_role_id"
+    t.index ["win_condition_id"], name: "index_win_condition_associations_on_win_condition_id"
+  end
+
+  create_table "win_conditions", force: :cascade do |t|
+    t.string "target_type"
+    t.integer "target"
+    t.boolean "must_be_lynched"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "game_sessions", "games"
   add_foreign_key "game_sessions", "roles"
   add_foreign_key "game_sessions", "users"
   add_foreign_key "games", "users", column: "game_master_id"
+  add_foreign_key "win_condition_associations", "roles"
+  add_foreign_key "win_condition_associations", "win_conditions"
 end

@@ -63,11 +63,16 @@ class GamesController < ApplicationController
   end
 
   def join
-    @game_session = GameSession.create(
-      user: User.find(session[:user_id]),
+    @user = User.find_by(id: session[:user_id])
+    @game_session = GameSession.new(
+      user: @user,
       game: @game,
       role: set_role
     )
+    TwilioService.send_sms(@user.phone_number, "You've joined #{@game.game_master.nickname}'s game! Welcome, #{@user.nickname}!")
+    unless @game_session.save
+      redirect_to users_path, notice: 'You must sign in first.'
+    end
   end
 
   private
@@ -84,7 +89,7 @@ class GamesController < ApplicationController
     def authenticate
       flash[:notice] = "Valid: @game is nil"
       return unless @game
-      valid = session[:access_token] = @game.game_master.access_token
+      valid = session[:access_token] = @game.game_master&.access_token
       flash[:notice] = "Valid: #{valid}"
     end
 

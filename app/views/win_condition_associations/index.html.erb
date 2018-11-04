@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Win Condition Associations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Win condition</th>
+      <th>Role</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @win_condition_associations.each do |win_condition_association| %>
+      <tr>
+        <td><%= win_condition_association.win_condition %></td>
+        <td><%= win_condition_association.role %></td>
+        <td><%= link_to 'Show', win_condition_association %></td>
+        <td><%= link_to 'Edit', edit_win_condition_association_path(win_condition_association) %></td>
+        <td><%= link_to 'Destroy', win_condition_association, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Win Condition Association', new_win_condition_association_path %>

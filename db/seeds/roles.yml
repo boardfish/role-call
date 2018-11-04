@@ -1,0 +1,116 @@
+- name: Investigator
+  group: Town 
+  role_type: Investigative
+  description: Investigate one person each night for a clue to their role.
+- name: Lookout
+  group: Town 
+  role_type: Investigative
+  description: Watch one person at night to see who visits them.
+- name: Sheriff
+  group: Town 
+  role_type: Investigative
+  description: Check one person each night for suspicious activity.
+- name: Spy
+  group: Town 
+  role_type: Investigative
+  description: Listen in on the Mafia at night, and hear whispers.
+- name: Bodyguard
+  group: Town 
+  role_type: Protective
+  description: Protect one person from death each night.
+- name: Doctor
+  group: Town 
+  role_type: Protective
+  description: Heal one person each night, preventing them from dying.
+- name: Jailor
+  group: Town 
+  role_type: Killing
+  description: You may choose one person during the day to jail for the night.
+- name: Veteran
+  group: Town 
+  role_type: Killing
+  description: Decide if you will go on alert and kill anyone who visits you.
+- name: Vigilante
+  group: Town 
+  role_type: Killing
+  description: Choose to take justice into your own hands and shoot someone.
+- name: Escort
+  group: Town 
+  role_type: Support
+  description: Distract someone each night.
+- name: Mayor
+  group: Town 
+  role_type: Support
+  description: Gain 3 votes when you reveal yourself as Mayor.
+- name: Medium
+  group: Town 
+  role_type: Support
+  description: Speak with all dead people at night.
+- name: Retributionist
+  group: Town 
+  role_type: Support
+  description: You may revive a dead town member.
+- name: Transporter
+  group: Town 
+  role_type: Support
+  description: Choose two people to transport at night.
+- name: Disguiser
+  group: Mafia 
+  role_type: Deception
+  description: Choose a dying target to disguise yourself as.
+- name: Forger
+  group: Mafia 
+  role_type: Deception
+  description: Choose a person and rewrite their last will at night.
+- name: Framer
+  group: Mafia 
+  role_type: Deception
+  description: Choose one person to frame each night.
+- name: Janitor
+  group: Mafia 
+  role_type: Deception
+  description: Choose a dying person to clean each night.
+- name: Godfather
+  group: Mafia 
+  role_type: Killing
+  description: Kill someone each night.
+- name: Mafioso
+  group: Mafia 
+  role_type: Killing
+  description: Carry out the Godfather's orders.
+- name: Consigliere
+  group: Mafia 
+  role_type: Support
+  description: Check one person for their exact role each night.
+- name: Consort
+  group: Mafia 
+  role_type: Support
+  description: Distract someone each night.
+- name: Blackmailer
+  group: Mafia 
+  role_type: Support
+  description: Choose one person each night to blackmail.
+- name: Serial Killer
+  group: Neutral 
+  role_type: Killing
+  description: Kill someone each night.
+- name: Werewolf
+  group: Neutral 
+  role_type: Killing
+  description: Transform into a Werewolf during the Full Moon.
+- name: Arsonist
+  group: Neutral 
+  role_type: Killing
+  description: Douse someone in gasoline or ignite all doused targets.
+- name: Executioner
+  group: Neutral 
+  role_type: Evil
+  description: Trick the Town into lynching your target.
+- name: Jester
+  group: Neutral 
+  role_type: Evil
+  description: Trick the Town into voting against you.
+- name: Witch
+  group: Neutral 
+  role_type: Evil
+  description: Control someone each night.

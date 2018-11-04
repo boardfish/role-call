@@ -1,0 +1,32 @@
+<%= form_with(model: win_condition, local: true) do |form| %>
+  <% if win_condition.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(win_condition.errors.count, "error") %> prohibited this win_condition from being saved:</h2>
+
+      <ul>
+      <% win_condition.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :target_type %>
+    <%= form.text_field :target_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :target %>
+    <%= form.number_field :target %>
+  </div>
+
+  <div class="field">
+    <%= form.label :must_be_lynched %>
+    <%= form.check_box :must_be_lynched %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

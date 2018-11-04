@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @win_condition.target_type %>
+</p>
+
+<p>
+  <strong>Target:</strong>
+  <%= @win_condition.target %>
+</p>
+
+<p>
+  <strong>Must be lynched:</strong>
+  <%= @win_condition.must_be_lynched %>
+</p>
+
+<%= link_to 'Edit', edit_win_condition_path(@win_condition) %> |
+<%= link_to 'Back', win_conditions_path %>
