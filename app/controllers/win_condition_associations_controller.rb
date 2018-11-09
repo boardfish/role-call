@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class WinConditionAssociationsController < ApplicationController
-  before_action :set_win_condition_association, only: [:show, :edit, :update, :destroy]
+  before_action :set_win_condition_association, only: %i[show edit update destroy]
 
   # GET /win_condition_associations
   # GET /win_condition_associations.json
@@ -9,8 +11,7 @@ class WinConditionAssociationsController < ApplicationController
 
   # GET /win_condition_associations/1
   # GET /win_condition_associations/1.json
-  def show
-  end
+  def show; end
 
   # GET /win_condition_associations/new
   def new
@@ -18,8 +19,7 @@ class WinConditionAssociationsController < ApplicationController
   end
 
   # GET /win_condition_associations/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /win_condition_associations
   # POST /win_condition_associations.json
@@ -62,13 +62,14 @@ class WinConditionAssociationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_win_condition_association
-      @win_condition_association = WinConditionAssociation.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def win_condition_association_params
-      params.require(:win_condition_association).permit(:win_condition_id, :role_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_win_condition_association
+    @win_condition_association = WinConditionAssociation.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def win_condition_association_params
+    params.require(:win_condition_association).permit(:win_condition_id, :role_id)
+  end
 end

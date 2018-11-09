@@ -36,5 +36,19 @@ class Game < ApplicationRecord
 
   def available_roles
     DEFAULT_QUOTAS.deep_merge(roles) { |group, quota, count| quota - count.count}
+      # Stage 1: delete all roles that aren't available
+      .map do |group, role_types|
+        [group, role_types.select { |_, quota| quota.positive? }]
+      end.to_h
+      # Stage 2: delete all groups that have no available role types
+      .reject do |group, role_types|
+        role_types.empty?
+      end
   end
-end
+
+  def random_role
+    group = available_roles.keys.shuffle.first
+    role_type = available_roles[group].keys.shuffle.first
+    Role.where(group: group, role_type: role_type).shuffle.first
+    # How do we add a condition for unique roles?
+  end

@@ -14,5 +14,5 @@
 
 # Seed all roles
 seed_file = Rails.root.join('db', 'seeds', 'roles.yml')
-config = YAML::load_file(seed_file)
+config = YAML.load_file(seed_file)
 Role.create!(config)

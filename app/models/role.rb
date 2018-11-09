@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Role < ApplicationRecord
   has_many :win_condition_associations, dependent: :destroy
   has_many :win_conditions, through: :win_condition_associations

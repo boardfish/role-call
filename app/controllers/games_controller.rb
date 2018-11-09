@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy, :join]
+  before_action :set_game, only: %i[show edit update destroy join]
   before_action :authenticate
 
   # GET /games
@@ -10,8 +12,7 @@ class GamesController < ApplicationController
 
   # GET /games/1
   # GET /games/1.json
-  def show
-  end
+  def show; end
 
   # GET /games/new
   def new
@@ -19,8 +20,7 @@ class GamesController < ApplicationController
   end
 
   # GET /games/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /games
   # POST /games.json
@@ -76,24 +76,26 @@ class GamesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_game
-      @game = Game.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def game_params
-      params.require(:game).permit(:user_id, :game_master_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_game
+    @game = Game.find(params[:id])
+  end
 
-    def authenticate
-      flash[:notice] = "Valid: @game is nil"
-      return unless @game
-      valid = session[:access_token] = @game.game_master&.access_token
-      flash[:notice] = "Valid: #{valid}"
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def game_params
+    params.require(:game).permit(:user_id, :game_master_id)
+  end
 
-    def set_role
-      Role.order("RANDOM()").first
-    end
+  def authenticate
+    flash[:notice] = 'Valid: @game is nil'
+    return unless @game
+
+    valid = session[:access_token] = @game.game_master&.access_token
+    flash[:notice] = "Valid: #{valid}"
+  end
+
+  def set_role
+    @game.random_role
+  end
 end

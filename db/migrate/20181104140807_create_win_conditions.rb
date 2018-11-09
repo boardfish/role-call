@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateWinConditions < ActiveRecord::Migration[5.2]
   def change
     create_table :win_conditions do |t|

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,70 +12,69 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_04_152854) do
-
+ActiveRecord::Schema.define(version: 20_181_104_152_854) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "game_sessions", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "game_id"
-    t.bigint "role_id"
-    t.integer "state"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "target"
-    t.index ["game_id"], name: "index_game_sessions_on_game_id"
-    t.index ["role_id"], name: "index_game_sessions_on_role_id"
-    t.index ["user_id"], name: "index_game_sessions_on_user_id"
+  create_table 'game_sessions', force: :cascade do |t|
+    t.bigint 'user_id'
+    t.bigint 'game_id'
+    t.bigint 'role_id'
+    t.integer 'state'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.integer 'target'
+    t.index ['game_id'], name: 'index_game_sessions_on_game_id'
+    t.index ['role_id'], name: 'index_game_sessions_on_role_id'
+    t.index ['user_id'], name: 'index_game_sessions_on_user_id'
   end
 
-  create_table "games", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "game_master_id"
-    t.index ["game_master_id"], name: "index_games_on_game_master_id"
+  create_table 'games', force: :cascade do |t|
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.bigint 'game_master_id'
+    t.index ['game_master_id'], name: 'index_games_on_game_master_id'
   end
 
-  create_table "roles", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "group"
-    t.string "role_type"
-    t.string "description"
+  create_table 'roles', force: :cascade do |t|
+    t.string 'name'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.string 'group'
+    t.string 'role_type'
+    t.string 'description'
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "phone_number"
-    t.string "nickname"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "access_token"
-    t.datetime "last_generated_at"
+  create_table 'users', force: :cascade do |t|
+    t.string 'phone_number'
+    t.string 'nickname'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.string 'access_token'
+    t.datetime 'last_generated_at'
   end
 
-  create_table "win_condition_associations", force: :cascade do |t|
-    t.bigint "win_condition_id"
-    t.bigint "role_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["role_id"], name: "index_win_condition_associations_on_role_id"
-    t.index ["win_condition_id"], name: "index_win_condition_associations_on_win_condition_id"
+  create_table 'win_condition_associations', force: :cascade do |t|
+    t.bigint 'win_condition_id'
+    t.bigint 'role_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['role_id'], name: 'index_win_condition_associations_on_role_id'
+    t.index ['win_condition_id'], name: 'index_win_condition_associations_on_win_condition_id'
   end
 
-  create_table "win_conditions", force: :cascade do |t|
-    t.string "target_type"
-    t.integer "target"
-    t.boolean "must_be_lynched"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'win_conditions', force: :cascade do |t|
+    t.string 'target_type'
+    t.integer 'target'
+    t.boolean 'must_be_lynched'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  add_foreign_key "game_sessions", "games"
-  add_foreign_key "game_sessions", "roles"
-  add_foreign_key "game_sessions", "users"
-  add_foreign_key "games", "users", column: "game_master_id"
-  add_foreign_key "win_condition_associations", "roles"
-  add_foreign_key "win_condition_associations", "win_conditions"
+  add_foreign_key 'game_sessions', 'games'
+  add_foreign_key 'game_sessions', 'roles'
+  add_foreign_key 'game_sessions', 'users'
+  add_foreign_key 'games', 'users', column: 'game_master_id'
+  add_foreign_key 'win_condition_associations', 'roles'
+  add_foreign_key 'win_condition_associations', 'win_conditions'
 end

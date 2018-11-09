@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'twilio-ruby'
 
 module TwilioService
@@ -6,10 +8,10 @@ module TwilioService
       Twilio::REST::Client.new(
         ENV.fetch('TWILIO_ACCOUNT_SID'),
         ENV.fetch('TWILIO_AUTH_TOKEN')
-        )
+      )
     end
-    
-    def send_sms(recipient, body)
+
+    def send_sms(_recipient, body)
       from = ENV.fetch('TWILIO_PHONE_NUMBER') # Your Twilio number
       to = '+447852406718' # Your mobile phone number
 

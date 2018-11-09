@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class WinConditionsController < ApplicationController
-  before_action :set_win_condition, only: [:show, :edit, :update, :destroy]
+  before_action :set_win_condition, only: %i[show edit update destroy]
 
   # GET /win_conditions
   # GET /win_conditions.json
@@ -9,8 +11,7 @@ class WinConditionsController < ApplicationController
 
   # GET /win_conditions/1
   # GET /win_conditions/1.json
-  def show
-  end
+  def show; end
 
   # GET /win_conditions/new
   def new
@@ -18,8 +19,7 @@ class WinConditionsController < ApplicationController
   end
 
   # GET /win_conditions/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /win_conditions
   # POST /win_conditions.json
@@ -62,13 +62,14 @@ class WinConditionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_win_condition
-      @win_condition = WinCondition.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def win_condition_params
-      params.require(:win_condition).permit(:type, :target, :must_be_lynched)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_win_condition
+    @win_condition = WinCondition.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def win_condition_params
+    params.require(:win_condition).permit(:type, :target, :must_be_lynched)
+  end
 end
