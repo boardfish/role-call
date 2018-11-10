@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Game < ApplicationRecord
-  has_many :game_sessions
+  has_many :game_sessions, dependent: :destroy
   has_many :users, through: :game_sessions
   belongs_to :game_master, class_name: 'User'
 
@@ -32,18 +32,23 @@ class Game < ApplicationRecord
       .group_by(&:group).map do |group, roles|
       { "#{group}": roles.group_by(&:role_type) }
     end[0].deep_symbolize_keys
+  rescue NoMethodError
+    require 'byebug'
+    byebug
   end
 
   def available_roles
-    DEFAULT_QUOTAS.deep_merge(roles) { |group, quota, count| quota - count.count}
-      # Stage 1: delete all roles that aren't available
+    base_quotas = roles || {}
+    DEFAULT_QUOTAS.deep_merge(base_quotas) { |group, quota, count| quota - count.count }
       .map do |group, role_types|
         [group, role_types.select { |_, quota| quota.positive? }]
-      end.to_h
-      # Stage 2: delete all groups that have no available role types
-      .reject do |group, role_types|
-        role_types.empty?
       end
+      .to_h
+      .reject { |group, role_types| role_types.empty? }
+      # Stage 1: calculate remaining role types
+      
+      # Stage 2: delete all roles that aren't available
+      # Stage 3: delete all groups that have no available role types
   end
 
   def random_role
@@ -52,3 +57,4 @@ class Game < ApplicationRecord
     Role.where(group: group, role_type: role_type).shuffle.first
     # How do we add a condition for unique roles?
   end
+end

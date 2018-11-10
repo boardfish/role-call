@@ -16,3 +16,6 @@
 seed_file = Rails.root.join('db', 'seeds', 'roles.yml')
 config = YAML.load_file(seed_file)
 Role.create!(config)
+win_condition_seed_file = Rails.root.join('db', 'seeds', 'win_conditions.yml')
+win_condition_config = YAML.load_file(win_condition_seed_file)
+WinCondition.create!(win_condition_config)
